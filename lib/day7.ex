@@ -18,7 +18,6 @@ defmodule Day7 do
         Enum.map(xs, fn x -> Enum.sum(1..abs(n - x)) end)
         |> Enum.sum() end)
     |> Enum.min()
-
   end
 
   def input do
