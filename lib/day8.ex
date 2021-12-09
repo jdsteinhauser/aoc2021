@@ -19,7 +19,7 @@ defmodule Day8 do
   def part2 do
     input()
     |> Enum.map(&solve/1)
-    
+    |> Enum.sum()    
   end
 
   def input() do
@@ -51,26 +51,23 @@ defmodule Day8 do
     [a | _] = seven -- one
     three = Enum.find(two_three_five, fn x -> Enum.count(x -- one) == 3 end)
     five = Enum.find(two_three_five -- [three], fn x -> Enum.count(x -- four) == 2 end)
+    [two | _] = two_three_five -- [three, five]
     [g | _] = (five -- four) -- [a]
     nine = Enum.find(zero_six_nine, fn x -> (x -- [a,g]) -- four == [] end)
     [e | _] = eight -- nine
-    [b | _] = four -- five
-    zero = Enum.find(zero_six_nine, fn x -> Enum.empty?((x -- [a,b,e,g]) -- one) end)
-    [six | _] = zero_six_nine -- [zero, nine]
-    [two | _] = two_three_five -- [three, five]
+    six = Enum.find(zero_six_nine, fn x -> Enum.empty?(x -- (five ++ [e])) end)
+    [zero | _] = zero_six_nine -- [six, nine]
 
     map = 
       [zero, one, two, three, four, five, six, seven, eight, nine]
       |> Enum.map(&Enum.sort/1)
       |> Enum.zip(0..9)
       |> Map.new()
-      |> IO.inspect()
 
     output
     |> Enum.map(&to_charlist/1)
     |> Enum.map(&Enum.sort/1)
     |> Enum.map(&(map[&1]))
-    |> IO.inspect()
     |> Integer.undigits()
   end
 
