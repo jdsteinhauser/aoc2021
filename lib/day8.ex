@@ -1,15 +1,5 @@
 defmodule Day8 do
-
-# 1 uses 2 segments
-# 2 uses 5 segments
-# 3 uses 5 segments
-# 4 uses 4 segments
-# 5 uses 5 segments
-# 7 uses 3 segments
-# 8 uses 7 segments
-# 9 uses 6 segments
-# 0 uses 6 segments
-
+  
   def part1 do
     input()
     |> Enum.flat_map(&(&1[:output]))
